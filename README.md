@@ -8,5 +8,5 @@ As an IT enthusiast my goal to automate one daily part of my life. At this point
 For this purpose we will use:
 - n8n
 - claudeAI
-- Notion DB
+- notion db
 - google calendar
