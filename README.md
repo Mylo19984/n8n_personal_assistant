@@ -10,3 +10,6 @@ For this purpose we will use:
 - claudeAI
 - notion db
 - google calendar
+
+
+![My Image](images/sh 20012025.png)
