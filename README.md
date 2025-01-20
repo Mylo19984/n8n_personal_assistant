@@ -11,5 +11,5 @@ For this purpose we will use:
 - notion db
 - google calendar
 
-
-![My Image](images/sh 20012025.png)
+Overview of project:
+<img width="1170" alt="sh 20012025" src="https://github.com/user-attachments/assets/538e5115-bdcf-49eb-b0ae-15e2dbc2cb36" />
