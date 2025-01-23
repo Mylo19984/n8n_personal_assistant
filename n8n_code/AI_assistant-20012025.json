@@ -11,8 +11,8 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.1,
       "position": [
-        -620,
-        -160
+        -680,
+        -140
       ],
       "id": "ab667213-9c67-4da2-b5f6-722378d5e52c",
       "name": "Telegram Trigger",
@@ -33,8 +33,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        160,
-        -20
+        400,
+        140
       ],
       "id": "9a13a6dd-fdd0-4cc2-adc9-8264ffdf14c6",
       "name": "Telegram",
@@ -82,8 +82,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -340,
-        20
+        -420,
+        40
       ],
       "id": "e0b60f7c-7e74-4600-9765-0b18bd36d148",
       "name": "If"
@@ -116,8 +116,8 @@
       "type": "n8n-nodes-base.notion",
       "typeVersion": 2.2,
       "position": [
-        -120,
-        120
+        20,
+        240
       ],
       "id": "2f8aabb9-2041-4431-b4bf-60288c900b7d",
       "name": "Notion",
@@ -127,6 +127,113 @@
           "name": "Notion api"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f2d3300e-d2b0-454f-ac4c-fb4953c1d02d",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "assistan",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -240,
+        120
+      ],
+      "id": "1b73e8db-f87e-4397-b86c-a101c6274671",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -180,
+        -160
+      ],
+      "id": "0effbc5a-fd86-4260-843f-505234bd003b",
+      "name": "Wait",
+      "webhookId": "ec40f626-bcd8-4263-beac-2e4e9300b449"
+    },
+    {
+      "parameters": {
+        "model": "claude-3-5-sonnet-20241022",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.2,
+      "position": [
+        140,
+        80
+      ],
+      "id": "35b03846-370e-46fd-8d3c-9bdb5ac9c2c9",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "40CpHvl6fYkjDam0",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Wait').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "replyMarkup": "=none",
+        "forceReply": {},
+        "replyKeyboardOptions": {},
+        "replyKeyboardRemove": {},
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        460,
+        -140
+      ],
+      "id": "1ba848e6-d57e-4fe1-a94f-120ff5e5df5c",
+      "name": "Telegram1",
+      "credentials": {
+        "telegramApi": {
+          "id": "RvudU9cpDTbALcjT",
+          "name": "Telegram api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        20,
+        -200
+      ],
+      "id": "ad3f4b7c-1ca7-488f-ae36-14288841c68f",
+      "name": "AI Agent"
     }
   ],
   "pinData": {},
@@ -147,7 +254,7 @@
         [],
         [
           {
-            "node": "Notion",
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -164,13 +271,69 @@
           }
         ]
       ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        []
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ff9412ea-eac5-4ec7-8a57-050bdd71db93",
+  "versionId": "9817267a-e8bc-4e4e-9d30-eb5f38b629a4",
   "meta": {
     "instanceId": "b3b02fbc03553ef316349692365c9dc5713b3956b8cb26ad8ec3e90aec85ff84"
   },
