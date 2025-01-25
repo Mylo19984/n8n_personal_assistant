@@ -155,8 +155,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -240,
-        120
+        -280,
+        200
       ],
       "id": "1b73e8db-f87e-4397-b86c-a101c6274671",
       "name": "If1"
@@ -234,6 +234,31 @@
       ],
       "id": "ad3f4b7c-1ca7-488f-ae36-14288841c68f",
       "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "milos.trpkovic@gmail.com",
+          "mode": "list",
+          "cachedResultName": "milos.trpkovic@gmail.com"
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        0
+      ],
+      "id": "80e1881f-d317-4f81-9127-d7b588139a85",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "kGoqFYFBwXjVSLA3",
+          "name": "gog-cal-oauth"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -327,13 +352,24 @@
           }
         ]
       ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "9817267a-e8bc-4e4e-9d30-eb5f38b629a4",
+  "versionId": "d917b7da-0434-4355-9073-157816ac303a",
   "meta": {
     "instanceId": "b3b02fbc03553ef316349692365c9dc5713b3956b8cb26ad8ec3e90aec85ff84"
   },
