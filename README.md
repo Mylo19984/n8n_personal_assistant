@@ -12,4 +12,5 @@ For this purpose we will use:
 - google calendar
 
 Overview of project:
-<img width="1170" alt="sh 20012025" src="https://github.com/user-attachments/assets/538e5115-bdcf-49eb-b0ae-15e2dbc2cb36" />
+<img width="1347" alt="Screenshot 2025-01-25 at 18 50 57" src="https://github.com/user-attachments/assets/faad9e6e-de51-4119-b2b2-ab32ddaaf403" />
+
